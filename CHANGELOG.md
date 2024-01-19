@@ -6,11 +6,11 @@
 rm -rf dist/ build/
 python3 -m pip install --upgrade pip
 python3 -m pip install --upgrade build
+# create egg-info and dist folders
 python3 -m build
 python3 -m pip install --upgrade twine
-# create egg-info folder
-python3 -m twine upload dist/* --verbose
 # use __token__ auth
+python3 -m twine upload -u __token__ dist/* --verbose
 # enter token
 ```
 
