@@ -1,4 +1,4 @@
-from importlib.metadata import version
-from .main import *
+"""init file of figer"""
+from .main import Figer
 
-__version__ = version(__package__)
+from .__version__ import __version__

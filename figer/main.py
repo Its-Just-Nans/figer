@@ -4,12 +4,13 @@ from os import mkdir, scandir
 import argparse
 import logging
 from json import loads, dumps
+from .__version__ import __version__
 
 home = expanduser("~")
 PROGRAM_NAME = "figer"
 FOLDER_FIGER = join(home, f".{PROGRAM_NAME}")
 CONF_FILE = join(FOLDER_FIGER, "config.json")
-VERSION = "1.0.0"
+VERSION = __version__
 logging.basicConfig(level=logging.DEBUG)
 LOG = logging.getLogger(PROGRAM_NAME)
 
@@ -96,9 +97,10 @@ class ConfigFile:
         subfolders = [basename(f.path) for f in scandir(FOLDER_FIGER) if f.is_dir()]
         for one_subfolder in subfolders:
             if one_subfolder not in self.users:
-                need_add = input(
-                    f"User {one_subfolder} has a directory but is not in the config, do we had it ? [Y/n]\n"
-                ).lower()
+                print(
+                    f"Directory '{one_subfolder}/' is present but it's not in the config !"
+                )
+                need_add = input("Should we had it ? [Y/n]\n").lower()
                 if need_add == "n" or need_add == "no":
                     continue
                 self.users[one_subfolder] = {}
@@ -116,9 +118,8 @@ class ConfigFile:
 def print_info():
     """print the info"""
     print(f"Welcome to {PROGRAM_NAME}")
-    print(
-        "This CLI let's you save and load you config files. It can be useful for multi user system"
-    )
+    print("This CLI let you save and load you config files")
+    print("It can be useful for multi user system")
     parse_args().print_help()
     print(f"{PROGRAM_NAME} - v{VERSION}")
 
@@ -126,8 +127,11 @@ def print_info():
 class Figer:
     """main class of CLI"""
 
-    def __init__(self, args) -> None:
-        ConfigFile().check()
+    def __init__(self, args=None) -> None:
+        if args is None:
+            print_info()
+            return
+        ConfigFile()
         if args.command == "save":
             self.save(args.username)
         elif args.command == "load":
