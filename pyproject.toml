@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "figer"
-version = "0.0.1"
+version = "0.0.2"
 description = "Easily manage config files in multi user environment"
 readme = "README.md"
 authors = [{ name = "n4n5", email = "its.just.n4n5@gmail.com" }]

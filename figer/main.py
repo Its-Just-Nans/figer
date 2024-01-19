@@ -209,5 +209,12 @@ def parse_args():
 
 def main():
     """Main entry point for the figer CLI."""
-    args = parse_args().parse_args()
-    Figer(args)
+    try:
+        args = parse_args().parse_args()
+        Figer(args)
+    except KeyboardInterrupt:
+        LOG.info("Exiting figer")
+        exit(0)
+    except Exception as e:
+        LOG.error("Error during execution: %s", str(e))
+        exit(1)
