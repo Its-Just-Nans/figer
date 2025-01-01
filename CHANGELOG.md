@@ -14,6 +14,10 @@ python3 -m twine upload -u __token__ dist/* --verbose
 # enter token
 ```
 
+## 2025-01-01
+
+- Bump to 1.0.0
+
 ## 2024-01-18
 
-Create `figer` package
+- Create `figer` package
